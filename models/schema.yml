@@ -1,0 +1,136 @@
+version: 2
+
+models:
+  - name: stg_ads
+    description: "Staging model for ads data loaded from the seed table"
+    columns:
+      - name: ad_id
+        description: "Ad identifier"
+        tests:
+          - not_null
+
+      - name: reporting_start
+        description: "Reporting start date as text (DD/MM/YYYY)"
+
+      - name: reporting_end
+        description: "Reporting end date as text (DD/MM/YYYY)"
+
+      - name: campaign_id
+        description: "Campaign identifier"
+
+      - name: fb_campaign_id
+        description: "Facebook campaign identifier"
+
+      - name: age
+        description: "Audience age bucket"
+
+      - name: gender
+        description: "Audience gender"
+
+      - name: impressions
+        description: "Number of impressions"
+
+      - name: clicks
+        description: "Number of clicks"
+
+      - name: spent
+        description: "Advertising spend"
+
+      - name: total_conversion
+        description: "Total conversions"
+
+      - name: approved_conversion
+        description: "Approved conversions"
+
+  - name: dim_ads
+    description: "Dimension table containing descriptive ad and audience attributes"
+    columns:
+      - name: ad_id
+        description: "Ad identifier"
+        tests:
+          - not_null
+
+      - name: campaign_id
+        description: "Campaign identifier"
+
+      - name: fb_campaign_id
+        description: "Facebook campaign identifier"
+
+      - name: age
+        description: "Audience age bucket"
+
+      - name: gender
+        description: "Audience gender"
+
+      - name: interest1
+        description: "Interest segment 1"
+
+      - name: interest2
+        description: "Interest segment 2"
+
+      - name: interest3
+        description: "Interest segment 3"
+
+  - name: fct_ads_performance
+    description: "Fact table containing ad performance metrics and derived KPIs"
+    columns:
+      - name: ad_id
+        description: "Foreign key-like reference to ads"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_ads')
+              field: ad_id
+
+      - name: campaign_id
+        description: "Campaign identifier"
+
+      - name: impressions
+        description: "Number of impressions"
+        tests:
+          - not_null
+
+      - name: clicks
+        description: "Number of clicks"
+        tests:
+          - not_null
+
+      - name: spent
+        description: "Advertising spend"
+        tests:
+          - not_null
+
+      - name: total_conversion
+        description: "Total conversions"
+
+      - name: approved_conversion
+        description: "Approved conversions"
+
+      - name: ctr
+        description: "Click-through rate (clicks / impressions)"
+
+      - name: cpc
+        description: "Cost per click (spent / clicks)"
+
+  - name: mart_campaign_summary
+    description: "Business-ready campaign level summary for reporting and dashboards"
+    columns:
+      - name: campaign_id
+        description: "Campaign identifier"
+        tests:
+          - not_null
+
+      - name: impressions
+        description: "Total impressions for campaign"
+
+      - name: clicks
+        description: "Total clicks for campaign"
+
+      - name: spent
+        description: "Total spend for campaign"
+
+      - name: ctr
+        description: "Campaign CTR"
+
+      - name: cpc
+        description: "Campaign CPC"

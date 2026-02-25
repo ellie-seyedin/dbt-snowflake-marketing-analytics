@@ -1,0 +1,17 @@
+# Python Virtual Environment
+.venv/
+__pycache__/
+
+# dbt specific
+target/
+dbt_packages/
+logs/
+
+# Snowflake / Credentials
+# (Common names for files holding sensitive data)
+profiles.yml
+.env
+.DS_Store
+
+# Git artifacts
+.gitkeep

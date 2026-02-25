@@ -1,0 +1,20 @@
+WITH raw_ads AS (
+    SELECT * FROM {{ ref('data') }}
+)
+SELECT
+    AD_ID,
+    REPORTING_START,
+    REPORTING_END,
+    CAMPAIGN_ID,
+    FB_CAMPAIGN_ID,
+    AGE,
+    GENDER,
+    INTEREST1,
+    INTEREST2,
+    INTEREST3,
+    IMPRESSIONS,
+    CLICKS,
+    SPENT,
+    TOTAL_CONVERSION,
+    APPROVED_CONVERSION
+FROM raw_ads

@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: ads_raw
+    database: ADS_ANALYTICS
+    schema: ANALYTICS_RAW
+    tables:
+      - name: r_ads
+        identifier: DATA
